@@ -42,7 +42,15 @@ The default isolation level in PostgreSQL is READ COMMITTED. At this level, each
 -- Default isolation level is READ COMMITTED
 SELECT * FROM students WHERE name = 'Alice';
 ```
-is same as:
+It is same as:
+```sql
+-- Start transaction
+BEGIN;
+-- Query
+SELECT * FROM students WHERE name = 'Alice';
+COMMIT;
+```
+And it is same as, we just implicitly set transaction level to be `READ COMMITTED`:
 ```sql
 -- Set isolation level to READ COMMITTED
 SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
@@ -56,14 +64,7 @@ and we can ignore
 ``SET TRANSACTION ISOLATION LEVEL READ COMMITTED;``
 because it is default behavior of ``BEGIN;``
 
-Above is the same as:
-```sql
--- Start transaction
-BEGIN;
--- Query
-SELECT * FROM students WHERE name = 'Alice';
-COMMIT;
-```
+
 
 It is clear that simple solution have something behind, now we can move to other chapter were 
 we will explain start of transaction with word ``BEGIN;``.
